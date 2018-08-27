@@ -12,6 +12,8 @@ services:
             - 3306:3306
         networks:
             - my-network
+        volumes:
+            - ./MySQL/:/var/lib/mysql rw
     tomcat:
         image: tomcat:9-jre10
         ports:
@@ -19,7 +21,7 @@ services:
         networks:
             - my-network
         volumes:
-            - ../TianMeow/target/TianMeow.war:/usr/local/tomcat/webapps/TianMeow.war
+            - ./TianMeow/target/TianMeow.war:/usr/local/tomcat/webapps/TianMeow.war
         depends_on:
             - mysql
 networks:
