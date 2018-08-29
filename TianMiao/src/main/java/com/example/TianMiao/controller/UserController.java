@@ -1,4 +1,4 @@
-package com.example.TianMeow.controller;
+package com.example.TianMiao.controller;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.TianMeow.exception.ResourceNotFoundException;
-import com.example.TianMeow.model.User;
-import com.example.TianMeow.repository.UserRepository;
+import com.example.TianMiao.exception.ResourceNotFoundException;
+import com.example.TianMiao.model.User;
+import com.example.TianMiao.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api")

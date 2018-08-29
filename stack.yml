@@ -15,6 +15,6 @@ services:
         ports:
             - 8080:8080
         volumes:
-            - ./TianMeow/target/TianMeow.war:/usr/local/tomcat/webapps/TianMeow.war
+            - ./TianMiao/target/TianMiao.war:/usr/local/tomcat/webapps/TianMiao.war
         depends_on:
             - mysql

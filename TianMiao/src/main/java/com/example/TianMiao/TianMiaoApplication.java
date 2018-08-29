@@ -1,4 +1,4 @@
-package com.example.TianMeow;
+package com.example.TianMiao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,14 +8,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-public class TianMeowApplication extends SpringBootServletInitializer {
+public class TianMiaoApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(TianMeowApplication.class);
+		return application.sources(TianMiaoApplication.class);
 	}
 	
 	public static void main(String[] args) {
-		SpringApplication.run(TianMeowApplication.class, args);
+		SpringApplication.run(TianMiaoApplication.class, args);
 	}
 }

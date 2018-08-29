@@ -1,4 +1,4 @@
-package com.example.TianMeow.model;
+package com.example.TianMiao.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
