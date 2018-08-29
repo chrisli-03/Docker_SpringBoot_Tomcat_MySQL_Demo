@@ -8,22 +8,13 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_DATABASE: TianMiao
-        ports:
-            - 3306:3306
-        networks:
-            - my-network
         volumes:
-            - ./MySQL/:/var/lib/mysql rw
+            - ./MySQL:/docker-entrypoint-initdb.d
     tomcat:
         image: tomcat:9-jre10
         ports:
             - 8080:8080
-        networks:
-            - my-network
         volumes:
             - ./TianMeow/target/TianMeow.war:/usr/local/tomcat/webapps/TianMeow.war
         depends_on:
             - mysql
-networks:
-    my-network:
-        driver: bridge

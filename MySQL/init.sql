@@ -1,4 +1,3 @@
-create database `TianMiao` default character set utf8 collate utf8_general_ci;
 use TianMiao;
 
 CREATE TABLE IF NOT EXISTS `user` (
