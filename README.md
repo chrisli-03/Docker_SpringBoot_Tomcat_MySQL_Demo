@@ -4,6 +4,7 @@
 Here are the tools you need:<br>
 > 1. Docker (duh)<br>
 > 2. Eclipse (I'm using Eclipse Photon)<br>
+> 3. Java10
 ### Step 1 - Clone this repo
 ```git clone https://github.com/HechengLi/Docker_SpringBoot_Tomcat_MySQL_Demo.git```
 ### Step 2 - Import TianMiao into eclipse as a maven project
