@@ -12,6 +12,7 @@ services:
             - ./MySQL:/docker-entrypoint-initdb.d
     tomcat:
         image: tomcat:9-jre10
+        container_name: tomcat_service
         ports:
             - 8080:8080
         volumes:
