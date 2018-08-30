@@ -5,7 +5,7 @@ Here are the tools you need:<br>
 > 1. Docker (duh)<br>
 > 2. Eclipse (I'm using Eclipse Photon)<br>
 ### Step 1 - Clone this repo
-```git clone https://github.com/HechengLi/Docker_SpringBoot_Tomcat_MySQL.git```
+```git clone https://github.com/HechengLi/Docker_SpringBoot_Tomcat_MySQL_Demo.git```
 ### Step 2 - Import TianMiao into eclipse as a maven project
 > Open your eclipse<br>
 > On the taskbar click File -> Import -> Maven -> Existing Maven Project<br>
