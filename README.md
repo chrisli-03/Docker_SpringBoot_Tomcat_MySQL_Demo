@@ -1,4 +1,6 @@
 # Docker with SpringBoot, tomcat and MySQL<br>
+Read how to build this project from scratch here -> [tutorial](https://hechengli.github.io/Docker_SpringBoot_Tomcat_MySQL_Demo/)<br>
+(It's very messy right now)<br>
 ## How to run this demo?<br>
 ### Step 0 - Requirements
 Here are the tools you need:<br>
