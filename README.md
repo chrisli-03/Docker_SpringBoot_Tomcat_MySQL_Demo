@@ -17,6 +17,7 @@ Here are the tools you need:<br>
 > Click Apply then Run (you should have TianMiao.war under Docker_SpringBoot_Tomcat_MySQL\TianMiao\target)
 ### Step 4 - Run the project with docker
 > Open your commandline, cd to the git directory<br>
+> Make sure you have docker app running<br>
 > Run 'docker-compose -f stack.yml up' (add -d if you want it to run in background)<br>
 ### Step 5 - Rerun if there's an error on first run
 > If you get an error while starting tomcat, it probably is because the docker container running Tomcat doesn't wait for MySQL to finish running it's setup script.<br>
