@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tutorial</title>
+	<style>
+		i { font-size: 11px; }
+	</style>
+</head>
+<body>
+	<h3>How to run a SpringBoot project with MySQL on Docker</h3>
+	<h4>Step 1 - Generate SpringBoot project</h4>
+	<p>Go to <a href="https://start.spring.io/">Spring Initializr</a> to start a SpringBoot Project, add MySQL, JPA, Web as denendencies. Click Generate Project. Import project into Eclipse as maven project</p>
+	<h4>Step 2 - Make SpringBoot build war file</h4>
+	<p>Open the Application.java file (ie. TianMiaoApplication.java) and add @EnableJpaAuditing below @SpringBootApplication. Add 'exdends SpringBootServletInitializer' after public class ...Application.</p>
+	<p>Open pom.xml, change packaging from 'jar' to 'war'. In dependency with artifactId 'spring-boot-starter-web' add <br/>
+		&lt;exclusions&gt;<br/>
+	        &nbsp;&nbsp;&lt;exclusion&gt;<br/>
+	            &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br/>
+	            &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;<br/>
+	        &nbsp;&nbsp;&lt;/exclusion&gt;<br/>
+	    &lt;/exclusions&gt;<br/>
+		In the dependency with artifactId 'spring-boot-starter-tomcat' change scope to 'provided'<br/>
+		This will disable the tomcat SpringBoot comes with.<br/>
+	</p>
+	<p>
+		Under bin/src/main/resources create application.properties file<br/>
+		example is like this:<br/>
+		## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)<br/>
+		spring.datasource.url = jdbc:mysql://mysql/TianMiao?allowPublicKeyRetrieval=true&useSSL=false<br/>
+		spring.datasource.username = root<br/>
+		spring.datasource.password = password<br/>
+		<br/>
+		## Hibernate Properties<br/>
+		# The SQL dialect makes Hibernate generate better SQL for the chosen database<br/>
+		spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect<br/>
+		<br/>
+		# Hibernate ddl auto (create, create-drop, validate, update)<br/>
+		spring.jpa.hibernate.ddl-auto = update<br/>
+	</p>
+	<h4>Step 3 - Setup MySql start script</h4>
+	<p>
+		Create init.sql in MySQL folder (you can change the name of folder and file)
+		Example is like this:<br/>
+		use TianMiao;<br/>
+		<br/>
+		CREATE TABLE IF NOT EXISTS `user` (<br/>
+		  &nbsp;&nbsp;`id` INT NOT NULL AUTO_INCREMENT,<br/>
+		  &nbsp;&nbsp;`username` VARCHAR(45) NOT NULL,<br/>
+		  &nbsp;&nbsp;`createdAt` DATETIME NULL,<br/>
+		  &nbsp;&nbsp;`update_at` DATETIME NULL,<br/>
+		  &nbsp;&nbsp;PRIMARY KEY (`id`),<br/>
+		  &nbsp;&nbsp;UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,<br/>
+		  &nbsp;&nbsp;UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE);<br/>
+	</p>
+	<h4>Final Step - create yml file</h4>
+	<p>
+		Create stack.yml file (If you use docker-compose.yml as filename, you only need to use docker-compose up when running)<br/>
+		version: '3.7' <i><- Docker-compose version?</i><br/>
+<br/>
+		services: <i><- where you write all your services</i><br/>
+		    &nbsp;&nbsp;mysql: <i><- name of service</i><br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;image: mysql:8 <i><- image you're using, for other images check dockerhub</i><br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;container_name: mysql_service <i><- container name, not required</i><br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;restart: always<br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;environment: <br/>
+		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_ROOT_PASSWORD: password<br/>
+		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_DATABASE: TianMiao<br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br/>
+		            &nbsp;&nbsp;&nbsp;&nbsp;- ./MySQL:/docker-entrypoint-initdb.d <i><- script for mysql when it starts, this means map the files in directory './MySQL' to '/docker-entrypoint-initdb.d' in this docker container, mysql will run all .sql files under '/docker-entrypoint-initdb.d' when it starts</i><br/>
+		    &nbsp;&nbsp;tomcat:<br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;image: tomcat:9-jre10<br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;container_name: tomcat_service<br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;ports: <i><- maps ports from docker container to your local machine</i><br/>
+		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 8080:8080 <i><- map port 8080 on your machine to 8080 on odcker container</i><br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br/>
+		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ./TianMiao/target/TianMiao.war:/usr/local/tomcat/webapps/TianMiao.war<br/>
+		        &nbsp;&nbsp;&nbsp;&nbsp;depends_on:<br/>
+		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- mysql <i><- this means this service depends on the service 'mysql'</i><br/>
+
+	</p>
+</html>
