@@ -24,6 +24,7 @@ Here are the tools you need:<br>
 > Run 'docker-compose -f stack.yml up' (add -d if you want it to run in background)<br>
 ### Step 5 - Rerun if there's an error on first run
 > If you get an error while starting tomcat, it probably is because the docker container running Tomcat doesn't wait for MySQL to finish running it's setup script.<br>
+> Wait for MySQL to finish running its script (it will log ...ready for connections...)<br>
 > Stop all containers and start again should fix the problem.
 ### Step 6 - Check if it works (suggestion - use postman)
 > Send Get Request to 'http://localhost:8080/TianMiao/api/users' to retrive data<br>
